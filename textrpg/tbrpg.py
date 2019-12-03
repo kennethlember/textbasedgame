@@ -23,13 +23,20 @@ def get_allowed_movechoices(up):
     allowed_movechoices = ["N", "S", "W", "E"]
     if up[0] == 0:
         allowed_movechoices.remove("N")
+    elif up[0] == 3:
+        allowed_movechoices.remove("S")
+    if up[1] == 0:
+        allowed_movechoices.remove("W")
+    elif up[1] == 3:
+        allowed_movechoices.remove("E")
     return allowed_movechoices
     
 while True:
     print(user_position)
     movechoice = ""
-    while movechoice not in get_allowed_movechoices(user_position):
-        movechoice = input("Which direction would you like to move to?(N/W/S/E): ")
+    directions = get_allowed_movechoices(user_position)
+    while movechoice not in directions:
+        movechoice = input("Which direction would you like to move to (" + "/".join(directions) + ")? ")
         movechoice = movechoice.capitalize()
 
     if movechoice == "N":
